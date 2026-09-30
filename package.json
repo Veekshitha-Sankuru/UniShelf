@@ -1,0 +1,11 @@
+{
+  "name": "unishelf-backend",
+  "version": "1.0.0",
+  "description": "UniShelf Library Management - JSON Server Backend",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3000 --host 0.0.0.0"
+  },
+  "dependencies": {
+    "json-server": "1.0.0-beta.3"
+  }
+}

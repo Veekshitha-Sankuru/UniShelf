@@ -13,7 +13,10 @@ if (sessionStorage.getItem("bv_logged_in") !== "yes") {
 // ============================================================
 // CONFIG
 // ============================================================
-var API_URL = "http://localhost:3000/books";
+// Uses Render backend in production, localhost in development
+var API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+  ? "http://localhost:3000/books"
+  : "https://unishelf-backend.onrender.com/books";
 
 // Open Library cover API — fetches a real cover image by title search
 function getCoverUrl(title, author) {
