@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniShelf — Intelligent Library Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Ambient canvas lighting -->
+  <div class="ambient-glow canvas-orb-1"></div>
+  <div class="ambient-glow canvas-orb-2"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">
+        <svg viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="10" fill="url(#nav-grad)"/>
+          <path d="M8 26V12a2 2 0 012-2h5a2 2 0 012 2v14" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <path d="M17 26V12a2 2 0 012-2h5a2 2 0 012 2v14" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 26h24" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="26" cy="10" r="2.5" fill="#a855f7"/>
+          <defs>
+            <linearGradient id="nav-grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="1" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <span class="sidebar-logo-text">UniShelf</span>
+        <span class="sidebar-logo-sub">Enterprise v2.4</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">WORKSPACE</div>
+      <button class="sidebar-btn active" data-section="dashboard" id="nav-dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+        <span class="nav-shortcut">⌘1</span>
+      </button>
+      <button class="sidebar-btn" data-section="books" id="nav-books">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        <span>Catalogue</span>
+        <span class="nav-badge" id="nav-total-badge">0</span>
+      </button>
+      <button class="sidebar-btn" data-section="add-book" id="nav-add">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <span>Add Book</span>
+        <span class="nav-shortcut">⌘3</span>
+      </button>
+
+      <div class="nav-section-label" style="margin-top:28px">CIRCULATION METRICS</div>
+      <div class="sidebar-stat-card">
+        <div class="sidebar-stat">
+          <div class="stat-indicator-wrap">
+            <span class="sidebar-stat-dot dot-available"></span>
+            <span class="stat-indicator-glow glow-available"></span>
+          </div>
+          <span class="sidebar-stat-name">Available</span>
+          <span class="sidebar-stat-num" id="sidebar-available">0</span>
+        </div>
+        <div class="sidebar-stat">
+          <div class="stat-indicator-wrap">
+            <span class="sidebar-stat-dot dot-issued"></span>
+            <span class="stat-indicator-glow glow-issued"></span>
+          </div>
+          <span class="sidebar-stat-name">Issued Out</span>
+          <span class="sidebar-stat-num" id="sidebar-issued">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Admin Profile & Logout -->
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">
+          <span>AD</span>
+          <span class="user-status-dot"></span>
+        </div>
+        <div class="user-details">
+          <span class="user-name">Librarian Admin</span>
+          <span class="user-role">Full Permissions</span>
+        </div>
+      </div>
+      <button class="sidebar-logout" id="logout-btn" title="End Session">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="app-wrapper">
+
+    <!-- Mobile top bar -->
+    <div class="mobile-topbar">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="mobile-logo-wrap">
+        <span class="mobile-logo">UniShelf</span>
+        <span class="mobile-badge">v2.4</span>
+      </div>
+    </div>
+
+    <!-- ===== SERVER WARNING BANNER ===== -->
+    <div id="server-banner" class="server-banner hidden">
+      <div class="server-banner-icon">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="server-banner-text">
+        <strong>REST Backend Disconnected</strong> — Start JSON Server via terminal: <code>json-server --watch db.json --port 3000</code> then refresh.
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- ============================= DASHBOARD ============================= -->
+    <section id="section-dashboard" class="section active">
+
+      <!-- Hero -->
+      <div class="dash-hero">
+        <div class="dash-hero-content">
+          <div class="dash-hero-eyebrow" id="hero-greeting">
+            <span class="eyebrow-dot"></span>
+            <span>Intelligent Campus Repository</span>
+          </div>
+          <h1 class="dash-hero-title">Your Knowledge Library,<br><span class="gradient-text">Unified & Reimagined.</span></h1>
+          <p class="dash-hero-sub">Catalog volumes, monitor inventory health in real time, and oversee book checkouts across the entire campus repository.</p>
+          <div class="dash-hero-btns">
+            <button class="hero-btn-primary" data-section="books">
+              <span>Browse Catalogue</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="hero-btn-secondary" data-section="add-book">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              <span>+ Add New Book</span>
+            </button>
+          </div>
+        </div>
+        <div class="dash-hero-visual">
+          <!-- 3D Isometric Digital Shelf Visual -->
+          <div class="shelf-scene">
+            <div class="shelf-board"></div>
+            <div class="shelf-books-row">
+              <div class="shelf-book is-b1"><div class="book-emboss">CSE</div></div>
+              <div class="shelf-book is-b2"><div class="book-emboss">DSA</div></div>
+              <div class="shelf-book is-b3"><div class="book-emboss">SYS</div></div>
+              <div class="shelf-book is-b4"><div class="book-emboss">SCI</div></div>
+              <div class="shelf-book is-b5"><div class="book-emboss">AI</div></div>
+            </div>
+            <div class="shelf-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento-Grid Stat Cards -->
+      <div class="stats-row">
+        <div class="stat-pill stat-total">
+          <div class="stat-pill-top">
+            <div class="stat-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            </div>
+            <span class="stat-pill-badge badge-primary">Catalogued</span>
+          </div>
+          <div class="stat-pill-main">
+            <div class="stat-pill-num" id="stat-total">0</div>
+            <div class="stat-pill-label">Total Repository Books</div>
+          </div>
+          <div class="stat-pill-footer">
+            <span class="stat-meta-text">All registered volumes</span>
+          </div>
+        </div>
+
+        <div class="stat-pill stat-avail">
+          <div class="stat-pill-top">
+            <div class="stat-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="stat-pill-badge badge-success" id="rate-badge">Ready</span>
+          </div>
+          <div class="stat-pill-main">
+            <div class="stat-pill-num" id="stat-available">0</div>
+            <div class="stat-pill-label">Available on Shelves</div>
+          </div>
+          <div class="stat-pill-footer">
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="avail-progress-fill" style="width: 0%"></div>
+            </div>
+            <span class="stat-meta-text" id="stat-circulation-rate">Calculating circulation...</span>
+          </div>
+        </div>
+
+        <div class="stat-pill stat-out">
+          <div class="stat-pill-top">
+            <div class="stat-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="stat-pill-badge badge-warning">On Loan</span>
+          </div>
+          <div class="stat-pill-main">
+            <div class="stat-pill-num" id="stat-issued">0</div>
+            <div class="stat-pill-label">Issued to Students</div>
+          </div>
+          <div class="stat-pill-footer">
+            <span class="stat-meta-text">Circulating actively</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recently Added -->
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Recently Added Books</h2>
+          <span class="section-subheading">Latest additions to the university shelf</span>
+        </div>
+        <button class="link-btn" data-section="books">
+          <span>View full catalogue</span>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+      <div id="recent-books-list" class="book-grid"></div>
+
+    </section>
+
+    <!-- ============================= CATALOGUE ============================= -->
+    <section id="section-books" class="section">
+      <div class="page-header">
+        <div>
+          <div class="page-title-row">
+            <h2 class="page-title">Book Catalogue</h2>
+            <span class="count-chip" id="catalogue-count">All Volumes</span>
+          </div>
+          <p class="page-sub">Browse, search, filter, issue or return any volume in real time</p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-bar">
+        <div class="search-box">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+          <input type="text" id="search-input" placeholder="Search by title or author…" autocomplete="off" spellcheck="false"/>
+          <kbd class="search-kbd" title="Press / or Ctrl+K to search">Ctrl K</kbd>
+          <button type="button" class="search-clear-btn hidden" id="search-clear-btn" aria-label="Clear search">&times;</button>
+        </div>
+        <div class="filter-select-wrap">
+          <select id="category-filter" class="filter-select">
+            <option value="all">📚 All Categories</option>
+            <option value="Fiction">📖 Fiction</option>
+            <option value="Computer Science">💻 Computer Science</option>
+            <option value="History">🏛️ History</option>
+            <option value="Self Help">🌱 Self Help</option>
+            <option value="Biography">👤 Biography</option>
+            <option value="Science">🔬 Science</option>
+            <option value="Other">📦 Other</option>
+          </select>
+        </div>
+        <div class="status-pills">
+          <button class="spill active" data-status="all">All</button>
+          <button class="spill" data-status="Available">Available</button>
+          <button class="spill" data-status="Issued">Issued</button>
+        </div>
+      </div>
+
+      <!-- Book Grid for catalogue -->
+      <div id="catalogue-grid" class="book-grid"></div>
+
+      <!-- No results -->
+      <div id="no-results" class="empty-state hidden">
+        <div class="empty-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect width="48" height="48" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"/>
+            <path d="M16 20h16M16 26h10" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="34" cy="34" r="6" stroke="#818cf8" stroke-width="2"/>
+            <path d="M38.5 38.5L43 43" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>No matching books found</h3>
+        <p>Try adjusting your search keywords or switching category filters.</p>
+      </div>
+    </section>
+
+    <!-- ============================= ADD BOOK ============================= -->
+    <section id="section-add-book" class="section">
+      <div class="page-header">
+        <div>
+          <h2 class="page-title">Add New Book</h2>
+          <p class="page-sub">Register a new volume into the institutional UniShelf collection</p>
+        </div>
+      </div>
+
+      <div class="add-layout">
+        <div class="form-card glass-card">
+          <div class="card-section-title">
+            <div class="card-icon-pill">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+            </div>
+            <div>
+              <h3>Book Metadata</h3>
+              <p>Enter title, author, and academic category</p>
+            </div>
+          </div>
+
+          <form id="add-book-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="add-title">Book Title <span class="req">*</span></label>
+                <div class="input-glow-wrap">
+                  <input type="text" id="add-title" placeholder="e.g. Designing Data-Intensive Applications" autocomplete="off"/>
+                </div>
+                <span class="ferr" id="err-title"></span>
+              </div>
+              <div class="form-group">
+                <label for="add-author">Author Name <span class="req">*</span></label>
+                <div class="input-glow-wrap">
+                  <input type="text" id="add-author" placeholder="e.g. Martin Kleppmann" autocomplete="off"/>
+                </div>
+                <span class="ferr" id="err-author"></span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:28px">
+              <label for="add-category">Category <span class="req">*</span></label>
+              <div class="input-glow-wrap">
+                <select id="add-category">
+                  <option value="">— Select an Academic Discipline —</option>
+                  <option value="Fiction">📖 Fiction</option>
+                  <option value="Computer Science">💻 Computer Science</option>
+                  <option value="History">🏛️ History</option>
+                  <option value="Self Help">🌱 Self Help</option>
+                  <option value="Biography">👤 Biography</option>
+                  <option value="Science">🔬 Science</option>
+                  <option value="Other">📦 Other</option>
+                </select>
+              </div>
+              <span class="ferr" id="err-category"></span>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-add" id="add-submit-btn">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+                <span>Add to Catalogue</span>
+              </button>
+              <button type="button" class="btn-reset" id="reset-form-btn">Reset Form</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="add-side">
+          <!-- 3D Hardcover Book Realistic Live Mockup -->
+          <div class="add-preview-card glass-card" id="add-preview">
+            <div class="preview-badge">Live Mockup Preview</div>
+            
+            <div class="hardcover-scene">
+              <div class="hardcover-book">
+                <div class="hardcover-spine"></div>
+                <div class="hardcover-cover" id="preview-cover">
+                  <div class="cover-gold-trim"></div>
+                  <div class="cover-inner-content">
+                    <span class="cover-preview-cat" id="preview-cat">Category</span>
+                    <p class="cover-preview-title" id="preview-title">Book Title</p>
+                    <p class="cover-preview-author" id="preview-author">Author Name</p>
+                  </div>
+                  <div class="cover-shine"></div>
+                </div>
+                <div class="hardcover-pages"></div>
+              </div>
+              <div class="hardcover-shadow"></div>
+            </div>
+
+            <div class="preview-status-pill">
+              <span class="pulse-dot"></span>
+              <span>Default Status: <strong>Available</strong></span>
+            </div>
+          </div>
+
+          <!-- Quick Tip Card -->
+          <div class="add-side-card glass-card">
+            <div class="card-section-title" style="margin-bottom:12px">
+              <span class="tip-icon">💡</span>
+              <h3 style="font-size:0.95rem">Cataloguing Guidelines</h3>
+            </div>
+            <ul>
+              <li>Title & Author fields are indexed for instant search.</li>
+              <li>Books are automatically initialized as <strong>Available</strong>.</li>
+              <li>Status toggles (Issue/Return) are accessible via the Catalogue.</li>
+              <li>Open Library covers are synchronized automatically by title.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end app-wrapper -->
+
+  <!-- Sidebar overlay for mobile -->
+  <div class="sidebar-overlay hidden" id="sidebar-overlay"></div>
+
+  <!-- ==================== EDIT MODAL ==================== -->
+  <div id="edit-modal" class="modal-overlay hidden">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <div class="modal-title-row">
+          <div class="modal-icon-wrap">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+          </div>
+          <div>
+            <h3>Edit Book Details</h3>
+            <p>Modify catalogue metadata for this volume</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="edit-book-form" novalidate>
+        <input type="hidden" id="edit-id"/>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="edit-title">Book Title <span class="req">*</span></label>
+            <div class="input-glow-wrap">
+              <input type="text" id="edit-title" autocomplete="off"/>
+            </div>
+            <span class="ferr" id="edit-err-title"></span>
+          </div>
+          <div class="form-group">
+            <label for="edit-author">Author <span class="req">*</span></label>
+            <div class="input-glow-wrap">
+              <input type="text" id="edit-author" autocomplete="off"/>
+            </div>
+            <span class="ferr" id="edit-err-author"></span>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:24px">
+          <label for="edit-category">Category <span class="req">*</span></label>
+          <div class="input-glow-wrap">
+            <select id="edit-category">
+              <option value="">— Select a Category —</option>
+              <option value="Fiction">📖 Fiction</option>
+              <option value="Computer Science">💻 Computer Science</option>
+              <option value="History">🏛️ History</option>
+              <option value="Self Help">🌱 Self Help</option>
+              <option value="Biography">👤 Biography</option>
+              <option value="Science">🔬 Science</option>
+              <option value="Other">📦 Other</option>
+            </select>
+          </div>
+          <span class="ferr" id="edit-err-category"></span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-add">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Save Changes
+          </button>
+          <button type="button" class="btn-reset" id="cancel-edit-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

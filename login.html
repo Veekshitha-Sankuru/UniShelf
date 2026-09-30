@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniShelf — Intelligent Library Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body>
+
+  <div class="login-wrapper">
+
+    <!-- ===== LEFT — Ambient Cinematic Library Panel ===== -->
+    <div class="photo-panel">
+      <!-- High-res library atmosphere -->
+      <img
+        class="library-photo"
+        src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1600&q=85&auto=format&fit=crop"
+        alt="Library Background"
+        onerror="this.src='https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=85&auto=format&fit=crop'"
+      />
+      <!-- Deep cinematic dark gradient overlay with ambient mesh glow -->
+      <div class="photo-overlay"></div>
+      <div class="photo-grid-pattern"></div>
+
+      <!-- Content layered on top of the visual -->
+      <div class="photo-content">
+        <div class="brand-logo">
+          <div class="brand-logo-icon">
+            <svg viewBox="0 0 44 44" fill="none">
+              <rect width="44" height="44" rx="12" fill="url(#brand-grad)"/>
+              <path d="M11 31V15a2 2 0 012-2h6a2 2 0 012 2v16" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M21 31V15a2 2 0 012-2h6a2 2 0 012 2v16" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M9 31h26" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="31" cy="13" r="3" fill="#a855f7"/>
+              <defs>
+                <linearGradient id="brand-grad" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#6366f1"/>
+                  <stop offset="1" stop-color="#8b5cf6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="brand-text-wrap">
+            <span class="brand-title">UniShelf</span>
+            <span class="brand-version">v2.4 Core</span>
+          </div>
+        </div>
+
+        <div class="photo-centerpiece">
+          <div class="live-pill">
+            <span class="pulse-dot"></span>
+            <span>REST API Active • Port 3000</span>
+          </div>
+          <h1 class="hero-headline">Architected for<br><span class="hero-gradient-text">Modern Knowledge.</span></h1>
+          <p class="hero-description">The high-performance university repository system. Seamlessly catalog, monitor availability, and track institutional literature.</p>
+          
+          <div class="hero-feature-grid">
+            <div class="feat-pill">
+              <span class="feat-icon">⚡</span>
+              <span>Sub-millisecond Search</span>
+            </div>
+            <div class="feat-pill">
+              <span class="feat-icon">📖</span>
+              <span>Open Library Cover Sync</span>
+            </div>
+            <div class="feat-pill">
+              <span class="feat-icon">🛡️</span>
+              <span>Strict Auth Guard</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-footer">
+          <span>Enterprise Campus Edition</span>
+          <span class="dot-sep">•</span>
+          <span>B.Tech Full-Stack Architecture</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT — Futuristic Glass Form Panel ===== -->
+    <div class="form-panel">
+      <!-- Ambient decorative glow orb -->
+      <div class="ambient-glow orb-1"></div>
+      <div class="ambient-glow orb-2"></div>
+
+      <div class="login-card" id="login-card">
+
+        <div class="lcard-header">
+          <div class="lcard-avatar">
+            <div class="avatar-halo"></div>
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="14" fill="#131b2e" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
+              <path d="M12 36V18a2 2 0 012-2h8a2 2 0 012 2v18" stroke="#818cf8" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M24 36V18a2 2 0 012-2h8a2 2 0 012 2v18" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M10 36h28" stroke="#6366f1" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M16 23h4M16 28h4M28 23h4M28 28h4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>Welcome back</h2>
+          <p>Authenticate to access the administrative dashboard</p>
+        </div>
+
+        <form id="login-form" novalidate>
+
+          <div class="lform-group">
+            <label for="login-username">Admin Username</label>
+            <div class="linput-wrap" id="wrap-username">
+              <svg class="linput-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+              </svg>
+              <input type="text" id="login-username" placeholder="e.g. admin" autocomplete="username" spellcheck="false"/>
+            </div>
+            <span class="lerr" id="err-username"></span>
+          </div>
+
+          <div class="lform-group">
+            <div class="label-row">
+              <label for="login-password">Password</label>
+              <span class="security-badge">256-bit Encrypted</span>
+            </div>
+            <div class="linput-wrap" id="wrap-password">
+              <svg class="linput-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+              </svg>
+              <input type="password" id="login-password" placeholder="Enter secure key" autocomplete="current-password"/>
+              <button type="button" id="toggle-pw" class="lpw-toggle" aria-label="Toggle password" tabindex="-1">
+                <svg id="eye-open" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                  <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                </svg>
+                <svg id="eye-closed" class="hidden" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd"/>
+                  <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.064 7 9.542 7 .847 0 1.669-.105 2.454-.303z"/>
+                </svg>
+              </button>
+            </div>
+            <span class="lerr" id="err-password"></span>
+          </div>
+
+          <span class="lerr lerr-center" id="err-general"></span>
+
+          <button type="submit" class="lbtn-signin" id="login-btn">
+            <span>Sign In to UniShelf</span>
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Quick 1-Click Demo Fill Action -->
+        <div class="demo-box">
+          <div class="demo-header">
+            <span class="demo-label">Demo Credentials</span>
+            <button type="button" class="btn-autofill" id="btn-autofill">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/></svg>
+              <span>Auto-Fill</span>
+            </button>
+          </div>
+          <div class="demo-keys">
+            <div class="demo-key">User: <code>admin</code></div>
+            <div class="demo-key">Pass: <code>admin123</code></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

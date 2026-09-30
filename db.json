@@ -1,0 +1,173 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "category": "Fiction",
+      "status": "Available"
+    },
+    {
+      "id": "2",
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen",
+      "category": "Computer Science",
+      "status": "Available"
+    },
+    {
+      "title": "Clean Code in C",
+      "author": "Robert C. Martin",
+      "category": "Computer Science",
+      "status": "Available",
+      "id": "3"
+    },
+    {
+      "id": "6",
+      "title": "Operating System Concepts",
+      "author": "Abraham Silberschatz",
+      "category": "Computer Science",
+      "status": "Issued"
+    },
+    {
+      "id": "7",
+      "title": "Wings of Fire",
+      "author": "A.P.J. Abdul Kalam",
+      "category": "Biography",
+      "status": "Available"
+    },
+    {
+      "id": "8",
+      "title": "Think and Grow Rich",
+      "author": "Napoleon Hill",
+      "category": "Self Help",
+      "status": "Available"
+    },
+    {
+      "id": "9",
+      "title": "A Brief History of Time",
+      "author": "Stephen Hawking",
+      "category": "Science",
+      "status": "Issued"
+    },
+    {
+      "id": "10",
+      "title": "Verity",
+      "author": "Colleen Hoover",
+      "category": "Fiction",
+      "status": "Issued"
+    },
+    {
+      "id": "11",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "category": "Self Help",
+      "status": "Available"
+    },
+    {
+      "id": "12",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "category": "Fiction",
+      "status": "Issued"
+    },
+    {
+      "id": "13",
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt & David Thomas",
+      "category": "Computer Science",
+      "status": "Available"
+    },
+    {
+      "id": "14",
+      "title": "Cosmos",
+      "author": "Carl Sagan",
+      "category": "Science",
+      "status": "Available"
+    },
+    {
+      "id": "15",
+      "title": "Steve Jobs",
+      "author": "Walter Isaacson",
+      "category": "Biography",
+      "status": "Available"
+    },
+    {
+      "id": "16",
+      "title": "The Diary of a Young Girl",
+      "author": "Anne Frank",
+      "category": "History",
+      "status": "Issued"
+    },
+    {
+      "id": "17",
+      "title": "Design Patterns",
+      "author": "Gang of Four",
+      "category": "Computer Science",
+      "status": "Available"
+    },
+    {
+      "id": "18",
+      "title": "Ikigai",
+      "author": "Héctor García & Francesc Miralles",
+      "category": "Self Help",
+      "status": "Available"
+    },
+    {
+      "id": "19",
+      "title": "The Origin of Species",
+      "author": "Charles Darwin",
+      "category": "Science",
+      "status": "Available"
+    },
+    {
+      "id": "20",
+      "title": "1984",
+      "author": "George Orwell",
+      "category": "Fiction",
+      "status": "Issued"
+    },
+    {
+      "id": "21",
+      "title": "Long Walk to Freedom",
+      "author": "Nelson Mandela",
+      "category": "Biography",
+      "status": "Available"
+    },
+    {
+      "id": "22",
+      "title": "Guns, Germs, and Steel",
+      "author": "Jared Diamond",
+      "category": "History",
+      "status": "Available"
+    },
+    {
+      "id": "23",
+      "title": "Deep Work",
+      "author": "Cal Newport",
+      "category": "Self Help",
+      "status": "Issued"
+    },
+    {
+      "id": "24",
+      "title": "The Selfish Gene",
+      "author": "Richard Dawkins",
+      "category": "Science",
+      "status": "Available"
+    },
+    {
+      "id": "25",
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "category": "Fiction",
+      "status": "Available"
+    },
+    {
+      "title": "God of Malice",
+      "author": "Rina Kent",
+      "category": "Fiction",
+      "status": "Available",
+      "id": "fwh1GMlA57I"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
